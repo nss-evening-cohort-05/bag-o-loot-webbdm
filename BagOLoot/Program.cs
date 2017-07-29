@@ -9,13 +9,9 @@ namespace BagOLoot
     {
         public static void Main(string[] args)
         {
-            DatabaseInterface db = new DatabaseInterface("BAGOLOOT_DB");
-            db.CheckChildTable();
-            db.CheckToyTable();
-
             MainMenu menu = new MainMenu();
-            ChildRegister book = new ChildRegister(db);
-            ToyRegister bag = new ToyRegister(db);
+            ChildRegister book = new ChildRegister();
+            ToyRegister bag = new ToyRegister();
 
             // Choice will hold the number entered by the user
             // after main menu ws displayed
@@ -35,7 +31,7 @@ namespace BagOLoot
 
                     // Menu option 2: Removing fish
                     case 2:
-                        AddToy.DoAction(bag, book, db);
+                        AddToy.DoAction(bag, book);
                         break;
                 }
             } while (choice != 3);
