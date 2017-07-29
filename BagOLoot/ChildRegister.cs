@@ -8,18 +8,16 @@ namespace BagOLoot
     public class ChildRegister
     {
         private List<Child> _children = new List<Child>();
-        public int AddChild (string child) 
+        public Child AddChild (string child) 
         {
-            _children.Add(
-                new Child()
+            var child = new Child()
                 {
-                    id = id,
                     name = child,
                     delivered = false
-                }
-            );
+                };
+            _children.Add(child);
 
-            return id;
+            return child;
         }
 
         public List<Child> GetChildren () => _children;
