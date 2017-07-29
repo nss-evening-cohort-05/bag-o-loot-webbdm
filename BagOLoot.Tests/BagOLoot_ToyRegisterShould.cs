@@ -4,50 +4,38 @@ using Xunit;
 
 namespace BagOLoot.Tests
 {
-    public class ToyRegisterShould: IDisposable
+    public class ToyRegisterShould
     {
         private readonly ToyRegister _register;
         private readonly ChildRegister _book;
-        private readonly DatabaseInterface _db;
 
         public ToyRegisterShould()
         {
-            _db = new DatabaseInterface("BAGOLOOT_TEST_DB");
-            _register = new ToyRegister(_db);
-            _book = new ChildRegister(_db);
-            _db.CheckChildTable();
-            _db.CheckToyTable();
+            _register = new ToyRegister();
+            _book = new ChildRegister();
         }
 
         [Fact]
         public void AddToy()
         {
             // Create a child
-            int id = _book.AddChild("Terell");
-            Child kid = _book.GetChild(id);
+            Child kid = _book.AddChild("Terell");
 
             // Add a toy for the child
             Toy toy = _register.Add("Silly Putty", kid);
-            Assert.True(toy.id != 0);
+            Assert.True(toy != null);
         }
 
         [Fact]
         public void RevokeToyFromChild()
         {
-            int id = _book.AddChild("Terell");
-            Child kid = _book.GetChild(id);
+            Child kid = _book.AddChild("Terell");
             Toy toy = _register.Add("Silly Putty", kid);
             _register.RevokeToy(kid, toy);
             List<Toy> toysForTerell = _register.GetToysForChild(kid);
 
             Assert.DoesNotContain(toy, toysForTerell);
 
-        }
-
-        public void Dispose()
-        {
-            _db.Delete("DELETE FROM toy");
-            _db.Delete("DELETE FROM child");
         }
     }
 }

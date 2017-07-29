@@ -11,15 +11,15 @@ namespace BagOLoot.Actions
       Console.Clear();
       Console.WriteLine ("Choose child");
 
-      List<Child> children = book.GetChildren();
+      var children = book.GetChildren().ToArray();
       foreach (Child child in children)
       {
-          Console.WriteLine($"{child.id}. {child.name}");
+          Console.WriteLine($"{Array.IndexOf(children,child)+1}. {child.name}");
       }
 
       Console.Write ("> ");
       string childName = Console.ReadLine();
-      Child kid = book.GetChild(int.Parse(childName));
+      Child kid = book.GetChild(children[int.Parse(childName)-1].name);
       
       Console.WriteLine ("Enter toy");
       Console.Write ("> ");

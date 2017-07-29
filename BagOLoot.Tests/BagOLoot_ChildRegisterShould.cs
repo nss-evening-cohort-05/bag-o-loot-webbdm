@@ -4,17 +4,13 @@ using Xunit;
 
 namespace BagOLoot.Tests
 {
-    public class ChildRegisterShould: IDisposable
+    public class ChildRegisterShould
     {
         private readonly ChildRegister _register;
-        private readonly DatabaseInterface _db;
 
         public ChildRegisterShould()
         {
-            _db = new DatabaseInterface("BAGOLOOT_TEST_DB");
-            _register = new ChildRegister(_db);
-            _db.CheckChildTable();
-            _db.CheckToyTable();
+            _register = new ChildRegister();
         }
 
         [Theory]
@@ -24,7 +20,7 @@ namespace BagOLoot.Tests
         public void AddChildren(string child)
         {
             var result = _register.AddChild(child);
-            Assert.True(result != 0);
+            Assert.True(result != null);
         }
 
         [Fact]
@@ -39,15 +35,9 @@ namespace BagOLoot.Tests
         [Fact]
         public void GetAChild()
         {
-            int svetlanaId = _register.AddChild("Svetlana");
-            Child svetlana = _register.GetChild(svetlanaId);
-            Assert.True(svetlana.id == svetlanaId);
-        }
-
-        public void Dispose()
-        {
-            _db.Delete("DELETE FROM toy");
-            _db.Delete("DELETE FROM child");
+            var created = _register.AddChild("Svetlana");
+            Child svetlana = _register.GetChild("Svetlana");
+            Assert.True(created.name == svetlana.name);
         }
     }
 }
