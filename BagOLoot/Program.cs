@@ -34,20 +34,9 @@ namespace BagOLoot
                         AddToy.DoAction(bag, book);
                         break;
 
-                    // case 3:
-                    //  RevokeToy.DoAction(kid, toy);
-                    //  break;
-
-                    // case 4:
-                    //  Review child's toy list
-                    //  ToyRegister.Review(kid, toy);
-                    //  break;
-
-                    // case 5:
-                    //     Child toy delivery complete
-
-                    // case 6:
-                    //     Yuletime Delivery Report
+                    case 3:
+                        RevokeToy.DoAction(bag, book);
+                        break;
 
                 }
             } while (choice != 7);
