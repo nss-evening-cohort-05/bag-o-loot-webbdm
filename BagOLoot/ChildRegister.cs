@@ -16,6 +16,7 @@ namespace BagOLoot
                 delivered = false
             };
             _children.Add(child);
+            
 
             return child;
         }

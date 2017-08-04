@@ -47,5 +47,9 @@ namespace BagOLoot
             return toyList;
 
         }
+
+        // public List<Toy> GetListOfToys(Child kid){
+        //    var createdList = from child in 
+        // }
     }
 }

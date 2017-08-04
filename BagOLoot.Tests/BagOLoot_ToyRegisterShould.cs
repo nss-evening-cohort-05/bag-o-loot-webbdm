@@ -37,5 +37,33 @@ namespace BagOLoot.Tests
             Assert.DoesNotContain(toy, toysForTerell);
 
         }
+
+        // [Fact]
+        // public void ListChildren()
+        // {
+        //     Child child1 = _book.AddChild("Fred");
+        //     Child child2 = _book.AddChild("Greg");
+        //     Toy toy1 = _register.Add("Ball", child1);
+        //     Toy toy2 = _register.Add("Top", child2);
+        //     Toy toy3 = _register.Add("Truck", child1);
+
+        //     //Assert.Count(); 
+        // }
+
+        [Fact]
+        public void ListAllofChildsToys()
+        {
+            Child child1 = _book.AddChild("Fred");
+            Child child2 = _book.AddChild("Greg");
+            Toy toy1 = _register.Add("Ball", child1);
+            Toy toy2 = _register.Add("Truck", child1);
+            Toy toy3 = _register.Add("Top", child2);
+
+            List<Toy> toysForKiddo = _register.GetToysForChild(child1);
+
+            Assert.Contains("Ball", "Truck");
+            // Assert.Count(); 
+        }
+
     }
 }
